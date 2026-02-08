@@ -1,0 +1,282 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Share+Tech+Mono&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #0d1117;
+  color: #c9d1d9;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  font-size: 13px;
+}
+
+.font-display {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+.font-tech {
+  font-family: 'Orbitron', 'Share Tech Mono', monospace;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #161b22;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #30363d;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #484f58;
+}
+
+/* Panel styles */
+.panel {
+  background: #161b22;
+  border: 1px solid #30363d;
+}
+
+.panel-header {
+  border-bottom: 1px solid #30363d;
+  padding: 8px 12px;
+}
+
+.panel-content {
+  padding: 12px;
+}
+
+/* Status colors */
+.status-online {
+  color: #3fb950;
+}
+
+.status-warning {
+  color: #d29922;
+}
+
+.status-error {
+  color: #f85149;
+}
+
+/* Accent colors */
+.accent-cyan {
+  color: #58a6ff;
+}
+
+.accent-green {
+  color: #3fb950;
+}
+
+.accent-yellow {
+  color: #d29922;
+}
+
+.accent-purple {
+  color: #a371f7;
+}
+
+/* Data display */
+.data-label {
+  color: #8b949e;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.data-value {
+  color: #c9d1d9;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.data-value-highlight {
+  color: #58a6ff;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Table styles */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th {
+  text-align: left;
+  color: #8b949e;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 6px 8px;
+  border-bottom: 1px solid #30363d;
+}
+
+.data-table td {
+  padding: 8px;
+  border-bottom: 1px solid #21262d;
+  font-size: 12px;
+}
+
+.data-table tr:hover {
+  background: #1c2128;
+}
+
+/* Progress bar */
+.progress-bar {
+  height: 4px;
+  background: #21262d;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #58a6ff;
+}
+
+.progress-fill-green {
+  background: #3fb950;
+}
+
+.progress-fill-yellow {
+  background: #d29922;
+}
+
+/* Mini chart bars */
+.chart-bar {
+  background: #3fb950;
+  min-width: 2px;
+}
+
+/* Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.badge-green {
+  background: rgba(63, 185, 80, 0.15);
+  color: #3fb950;
+}
+
+.badge-blue {
+  background: rgba(88, 166, 255, 0.15);
+  color: #58a6ff;
+}
+
+.badge-yellow {
+  background: rgba(210, 153, 34, 0.15);
+  color: #d29922;
+}
+
+.badge-red {
+  background: rgba(248, 81, 73, 0.15);
+  color: #f85149;
+}
+
+/* Divider */
+.divider {
+  height: 1px;
+  background: #30363d;
+}
+
+/* List item */
+.list-item {
+  padding: 8px 12px;
+  border-bottom: 1px solid #21262d;
+  transition: background 0.15s;
+}
+
+.list-item:hover {
+  background: #1c2128;
+}
+
+/* Input styles */
+input, select {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  color: #c9d1d9;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #58a6ff;
+}
+
+/* Button */
+.btn {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-primary {
+  background: #238636;
+  border: 1px solid #238636;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #2ea043;
+}
+
+.btn-secondary {
+  background: #21262d;
+  border: 1px solid #30363d;
+  color: #c9d1d9;
+}
+
+.btn-secondary:hover {
+  background: #30363d;
+}
+
+.btn-active {
+  background: #388bfd;
+  border-color: #388bfd;
+  color: #fff;
+}
+
+/* Particle background - minimal */
+.particle-bg {
+  display: none;
+}
+
+/* Selection */
+::selection {
+  background: rgba(88, 166, 255, 0.3);
+}
+
+/* Focus */
+*:focus {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 2px solid #58a6ff;
+  outline-offset: 1px;
+}
