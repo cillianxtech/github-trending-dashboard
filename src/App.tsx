@@ -2,23 +2,21 @@ import { useState, useEffect } from 'react';
 import { Globe } from './components/Globe';
 import { StatsPanel } from './components/StatsPanel';
 import { TrendingList } from './components/TrendingList';
-import { AITrendingList } from './components/AITrendingList';
+import { OpenRouterRanking } from './components/OpenRouterRanking';
 import { FilterPanel } from './components/FilterPanel';
 import { Header } from './components/Header';
 import { AIUsageRanking } from './components/AIUsageRanking';
 import { TrendingRepo } from './types';
-import { fetchTrendingRepos, fetchAITrendingRepos } from './api';
+import { fetchTrendingRepos } from './api';
 
 function App() {
   const [repos, setRepos] = useState<TrendingRepo[]>([]);
-  const [aiRepos, setAIRepos] = useState<TrendingRepo[]>([]);
   const [loading, setLoading] = useState(true);
   const [language, setLanguage] = useState('');
   const [since, setSince] = useState('daily');
 
   useEffect(() => {
     loadTrending();
-    loadAITrending();
   }, [language, since]);
 
   const loadTrending = async () => {
@@ -30,15 +28,6 @@ function App() {
       console.error('Failed to load trending:', error);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const loadAITrending = async () => {
-    try {
-      const data = await fetchAITrendingRepos({ since });
-      setAIRepos(data);
-    } catch (error) {
-      console.error('Failed to load AI trending:', error);
     }
   };
 
@@ -121,7 +110,7 @@ function App() {
                     </tr>
                   </thead>
                   <tbody>
-                    {repos.slice(0, 8).map((repo, i) => (
+                    {repos.slice(0, 10).map((repo, i) => (
                       <tr key={i}>
                         <td>
                           <a href={repo.url} target="_blank" rel="noopener noreferrer" className="text-[#58a6ff] hover:underline">
@@ -199,12 +188,12 @@ function App() {
             </div>
           </div>
 
-          {/* Trending List - 固定高度 450px */}
+          {/* GitHub Trending Repos - 固定高度 450px */}
           <div className="panel h-[450px] flex flex-col">
             <div className="panel-header flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-[#d29922]"></div>
-                <span className="text-xs font-medium text-[#8b949e] uppercase tracking-wide">Trending</span>
+                <span className="text-xs font-medium text-[#8b949e] uppercase tracking-wide">GitHub Trending</span>
               </div>
               <span className="text-[10px] text-[#484f58]">{repos.length} repos</span>
             </div>
@@ -213,17 +202,17 @@ function App() {
             </div>
           </div>
 
-          {/* AI Trending List - 固定高度 450px */}
+          {/* AI Models - OpenRouter Rankings */}
           <div className="panel h-[450px] flex flex-col">
             <div className="panel-header flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-[#a371f7]"></div>
-                <span className="text-xs font-medium text-[#8b949e] uppercase tracking-wide">AI Trending</span>
+                <div className="w-2 h-2 rounded-full bg-[#58a6ff]"></div>
+                <span className="text-xs font-medium text-[#8b949e] uppercase tracking-wide">AI Models</span>
               </div>
-              <span className="px-2 py-0.5 text-[9px] bg-[#a371f7]/10 text-[#a371f7] rounded">AI</span>
+              <span className="px-2 py-0.5 text-[9px] bg-[#58a6ff]/10 text-[#58a6ff] rounded">OpenRouter</span>
             </div>
-            <div className="flex-1 overflow-auto p-3">
-              <AITrendingList repos={aiRepos} loading={loading} />
+            <div className="flex-1 overflow-hidden p-2">
+              <OpenRouterRanking />
             </div>
           </div>
         </div>

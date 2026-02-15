@@ -10,7 +10,7 @@ export function TrendingList({ repos, loading }: TrendingListProps) {
   if (loading) {
     return (
       <div className="space-y-2">
-        {Array.from({ length: 8 }).map((_, i) => (
+        {Array.from({ length: 10 }).map((_, i) => (
           <div key={i} className="p-3 rounded bg-[#0d1117] border border-[#21262d] animate-pulse">
             <div className="h-3 bg-[#21262d] rounded w-3/4 mb-2" />
             <div className="h-2 bg-[#21262d] rounded w-1/2" />
@@ -20,7 +20,7 @@ export function TrendingList({ repos, loading }: TrendingListProps) {
     );
   }
 
-  const displayRepos = repos.slice(0, 12);
+  const displayRepos = repos.slice(0, 10);
 
   return (
     <div className="space-y-2">

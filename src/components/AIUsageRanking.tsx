@@ -76,7 +76,7 @@ export function AIUsageRanking() {
         {loading ? (
           // Loading skeleton
           <div className="space-y-1.5">
-            {Array.from({ length: 8 }).map((_, i) => (
+            {Array.from({ length: 10 }).map((_, i) => (
               <div key={i} className="p-2 rounded bg-[#0d1117] border border-[#21262d]">
                 <div className="flex items-center justify-between mb-1.5">
                   <div className="flex items-center gap-2">

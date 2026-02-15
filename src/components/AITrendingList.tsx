@@ -10,7 +10,7 @@ export function AITrendingList({ repos, loading }: AITrendingListProps) {
   if (loading) {
     return (
       <div className="space-y-2">
-        {Array.from({ length: 8 }).map((_, i) => (
+        {Array.from({ length: 10 }).map((_, i) => (
           <div key={i} className="p-2.5 rounded bg-[#0d1117] border border-[#21262d] animate-pulse">
             <div className="h-3 bg-[#21262d] rounded w-3/4 mb-2" />
             <div className="h-2 bg-[#21262d] rounded w-1/2" />
@@ -20,7 +20,7 @@ export function AITrendingList({ repos, loading }: AITrendingListProps) {
     );
   }
 
-  const displayRepos = repos.slice(0, 12);
+  const displayRepos = repos.slice(0, 10);
 
   return (
     <div className="space-y-2">
@@ -30,17 +30,17 @@ export function AITrendingList({ repos, loading }: AITrendingListProps) {
           href={repo.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="block p-2.5 rounded bg-[#0d1117] border border-[#21262d] hover:border-[#a371f7]/50 transition-all group"
+          className="block p-2.5 rounded bg-[#0d1117] border border-[#21262d] hover:border-[#58a6ff]/50 transition-all group"
         >
           <div className="flex items-center justify-between mb-1">
-            <span className="text-xs font-mono text-[#a371f7]">
+            <span className="text-xs font-mono text-[#58a6ff]">
               {String(index + 1).padStart(2, '0')}
             </span>
             <span className="text-[10px] text-[#8b949e]">
               {repo.language}
             </span>
           </div>
-          <div className="text-xs text-[#a371f7] truncate mb-1 group-hover:underline">
+          <div className="text-xs text-[#58a6ff] truncate mb-1 group-hover:underline">
             {repo.repositoryName}
           </div>
           <p className="text-[10px] text-[#8b949e] line-clamp-1 mb-1">
@@ -48,7 +48,7 @@ export function AITrendingList({ repos, loading }: AITrendingListProps) {
           </p>
           <div className="flex items-center gap-2 text-[9px] text-[#8b949e]">
             <span className="text-[#d29922]">★ {repo.starsSince.toLocaleString()}</span>
-            <span className="text-[#a371f7]">⟳ {repo.forks.toLocaleString()}</span>
+            <span className="text-[#58a6ff]">⟳ {repo.forks.toLocaleString()}</span>
           </div>
         </a>
       ))}

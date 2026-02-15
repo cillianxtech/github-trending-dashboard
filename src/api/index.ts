@@ -346,6 +346,76 @@ function generateMockAIData(): TrendingRepo[] {
       starsSince: 890,
       since: 'daily',
       builtBy: []
+    },
+    {
+      rank: 6,
+      username: 'microsoft',
+      repositoryName: 'semantic-kernel',
+      url: 'https://github.com/microsoft/semantic-kernel',
+      description: 'Integrate cutting-edge LLM technology quickly and easily into your apps',
+      language: 'C#',
+      languageColor: '#178600',
+      totalStars: 21000,
+      forks: 3200,
+      starsSince: 210,
+      since: 'daily',
+      builtBy: []
+    },
+    {
+      rank: 7,
+      username: 'openai',
+      repositoryName: 'whisper',
+      url: 'https://github.com/openai/whisper',
+      description: 'Robust Speech Recognition via Large-Scale Weak Supervision',
+      language: 'Python',
+      languageColor: '#3572A5',
+      totalStars: 58000,
+      forks: 6800,
+      starsSince: 580,
+      since: 'daily',
+      builtBy: []
+    },
+    {
+      rank: 8,
+      username: 'compvis',
+      repositoryName: 'stable-diffusion',
+      url: 'https://github.com/CompVis/stable-diffusion',
+      description: 'A latent text-to-image diffusion model',
+      language: 'Python',
+      languageColor: '#3572A5',
+      totalStars: 65000,
+      forks: 9500,
+      starsSince: 650,
+      since: 'daily',
+      builtBy: []
+    },
+    {
+      rank: 9,
+      username: 'google',
+      repositoryName: 'jax',
+      url: 'https://github.com/google/jax',
+      description: 'Composable transformations of Python+NumPy programs',
+      language: 'Python',
+      languageColor: '#3572A5',
+      totalStars: 28000,
+      forks: 2500,
+      starsSince: 280,
+      since: 'daily',
+      builtBy: []
+    },
+    {
+      rank: 10,
+      username: 'anthropics',
+      repositoryName: 'anthropic-sdk-python',
+      url: 'https://github.com/anthropics/anthropic-sdk-python',
+      description: 'Anthropic API Python SDK',
+      language: 'Python',
+      languageColor: '#3572A5',
+      totalStars: 8500,
+      forks: 1100,
+      starsSince: 85,
+      since: 'daily',
+      builtBy: []
     }
   ];
 
@@ -473,8 +543,8 @@ export async function fetchAIToolsRanking(): Promise<AITool[]> {
       category: getCategory(repo.name, repo.description || ''),
     }));
 
-    // 按 stars 排序并取前 12 个
-    return tools.sort((a, b) => b.stars - a.stars).slice(0, 12);
+    // 按 stars 排序并取前 10 个
+    return tools.sort((a, b) => b.stars - a.stars).slice(0, 10);
   } catch (error) {
     console.error('Error fetching AI tools ranking:', error);
     // 返回静态数据作为fallback
@@ -594,28 +664,6 @@ function getStaticAITools(): AITool[] {
       url: 'https://github.com/openai/openai-cookbook',
       updatedAt: '2024-01-08T13:20:00Z',
       category: 'LLM',
-    },
-    {
-      name: 'Detectron2',
-      owner: 'facebookresearch',
-      description: 'Detectron2 is FAIR\'s next-generation library for object detection and segmentation.',
-      language: 'Python',
-      stars: 28000,
-      forks: 6100,
-      url: 'https://github.com/facebookresearch/detectron2',
-      updatedAt: '2024-01-07T11:30:00Z',
-      category: 'CV',
-    },
-    {
-      name: 'awesome-ai',
-      owner: 'ai',
-      description: 'A curated list of AI resources',
-      language: 'TypeScript',
-      stars: 156000,
-      forks: 18500,
-      url: 'https://github.com/ai/awesome-ai',
-      updatedAt: '2024-01-06T10:15:00Z',
-      category: 'Tool',
     },
   ];
 }

@@ -370,7 +370,7 @@ function DataFlows({ repos }: { repos: TrendingRepo[]; languageStats: Record<str
     }[] = [];
     
     // 基于实际仓库创建流向
-    const topRepos = repos.slice(0, 8);
+    const topRepos = repos.slice(0, 10);
     
     topRepos.forEach((repo, idx) => {
       const startIdx = idx % WORLD_CITIES.length;
