@@ -1,4 +1,3 @@
-import { Star, GitFork, ExternalLink } from 'lucide-react';
 import { TrendingRepo } from '../types';
 
 interface TrendingListProps {

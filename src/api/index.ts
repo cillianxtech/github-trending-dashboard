@@ -487,22 +487,6 @@ function getCategory(name: string, description: string): string {
   return 'Other';
 }
 
-// 计算相对时间
-function getRelativeTime(dateString: string): string {
-  const date = new Date(dateString);
-  const now = new Date();
-  const diffMs = now.getTime() - date.getTime();
-  const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-  const diffDays = Math.floor(diffHours / 24);
-  const diffMonths = Math.floor(diffDays / 30);
-
-  if (diffHours < 1) return '< 1h';
-  if (diffHours < 24) return `${diffHours}h ago`;
-  if (diffDays < 30) return `${diffDays}d ago`;
-  if (diffMonths < 12) return `${diffMonths}mo ago`;
-  return '1y+ ago';
-}
-
 export async function fetchAIToolsRanking(): Promise<AITool[]> {
   try {
     // 构建搜索查询 - 搜索AI相关的热门仓库

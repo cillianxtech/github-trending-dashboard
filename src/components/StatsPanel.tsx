@@ -33,14 +33,6 @@ const LANGUAGE_COLORS: Record<string, string> = {
 };
 
 export function StatsPanel({ totalRepos, totalStars, totalForks, languages, loading, languageStats }: StatsPanelProps) {
-  // 生成图表数据
-  const chartData = useMemo(() => {
-    return Array.from({ length: 30 }).map((_, i) => {
-      const seed = (i * 7 + 13) % 100;
-      return 15 + (seed / 100) * 85;
-    });
-  }, []);
-
   // 计算语言排行
   const topLanguages = useMemo(() => {
     const total = Object.values(languageStats).reduce((sum, count) => sum + count, 0);

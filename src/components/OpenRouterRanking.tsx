@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ExternalLink, Star, Zap } from 'lucide-react';
+import { ExternalLink, Zap } from 'lucide-react';
 
 interface OpenRouterModel {
   id: string;

@@ -49,32 +49,6 @@ const WORLD_CITIES = [
   { name: 'Sao Paulo', lat: -23.5505, lng: -46.6333, country: 'Brazil' },
 ];
 
-// 七大洲轮廓数据 - 简化版
-const CONTINENTS_OUTLINE: [number, number][][] = [
-  // 北美洲
-  [[-168, 66], [-160, 60], [-150, 61], [-140, 60], [-130, 55], [-125, 50], [-124, 42], [-117, 32], [-105, 25], [-97, 26], [-82, 25], [-80, 30], [-75, 35], [-70, 42], [-67, 45], [-60, 47], [-55, 50], [-60, 55], [-70, 65], [-85, 72], [-120, 70], [-160, 70], [-168, 66]],
-  // 南美洲
-  [[-80, 10], [-75, 5], [-60, 5], [-50, 0], [-40, -10], [-38, -15], [-45, -25], [-55, -35], [-68, -55], [-75, -48], [-75, -35], [-70, -25], [-80, -5], [-80, 10]],
-  // 欧洲
-  [[-10, 36], [0, 38], [10, 45], [20, 40], [30, 45], [40, 42], [30, 55], [20, 62], [10, 62], [0, 55], [-10, 40], [-10, 36]],
-  // 非洲
-  [[-18, 28], [-5, 35], [10, 35], [32, 32], [40, 20], [50, 12], [45, 0], [35, -20], [28, -33], [18, -32], [10, -10], [0, 5], [-10, 8], [-18, 20], [-18, 28]],
-  // 亚洲
-  [[30, 42], [50, 38], [70, 55], [90, 52], [110, 35], [120, 22], [105, 10], [90, 22], [75, 30], [60, 28], [45, 35], [30, 42]],
-  // 大洋洲
-  [[115, -22], [130, -12], [150, -22], [153, -28], [145, -38], [130, -32], [115, -22]],
-  // 南极洲
-  [[-180, -70], [-120, -70], [-60, -72], [0, -70], [60, -68], [120, -68], [180, -70]],
-  // 格陵兰
-  [[-45, 60], [-25, 70], [-25, 78], [-45, 78], [-60, 70], [-45, 60]],
-  // 日本
-  [[130, 32], [140, 38], [145, 44], [140, 35], [130, 32]],
-  // 英国
-  [[-5, 50], [0, 52], [-3, 58], [-5, 50]],
-  // 新西兰
-  [[166, -35], [175, -42], [178, -47], [170, -42], [166, -35]],
-];
-
 // 信息流颜色 - 4种颜色（青色、蓝色、紫色、橙色）
 const FLOW_COLORS = ['#00ffaa', '#4a9aff', '#a855f7', '#f97316'];
 
@@ -188,66 +162,6 @@ function Atmosphere() {
         />
       </Sphere>
     </>
-  );
-}
-
-// 七大洲轮廓 - 实线（70%连接）
-function ContinentOutlines() {
-  const lines = useMemo(() => {
-    return CONTINENTS_OUTLINE.map((outline, idx) => {
-      // 将轮廓点转换为3D坐标
-      const allPoints = outline.map(([lng, lat]) => latLngToVector3(lat, lng, 2.01));
-      const geometry = new THREE.BufferGeometry().setFromPoints(allPoints);
-      return { geometry, key: idx };
-    });
-  }, []);
-
-  return (
-    <group>
-      {lines.map(({ geometry, key }) => (
-        <line key={key} geometry={geometry}>
-          <lineBasicMaterial 
-            color={key < 7 ? '#2a7acc' : '#5abaff'} 
-            transparent 
-            opacity={0.85} 
-          />
-        </line>
-      ))}
-    </group>
-  );
-}
-
-function GridLines() {
-  const lines = useMemo(() => {
-    const result: THREE.Vector3[][] = [];
-    for (let lat = -60; lat <= 60; lat += 30) {
-      const points: THREE.Vector3[] = [];
-      for (let lng = -180; lng <= 180; lng += 5) {
-        points.push(latLngToVector3(lat, lng, 2.005));
-      }
-      result.push(points);
-    }
-    for (let lng = -180; lng < 180; lng += 30) {
-      const points: THREE.Vector3[] = [];
-      for (let lat = -90; lat <= 90; lat += 5) {
-        points.push(latLngToVector3(lat, lng, 2.005));
-      }
-      result.push(points);
-    }
-    return result;
-  }, []);
-
-  return (
-    <group>
-      {lines.map((points, i) => {
-        const geometry = new THREE.BufferGeometry().setFromPoints(points);
-        return (
-          <line key={i} geometry={geometry}>
-            <lineBasicMaterial color="#1a4a6a" transparent opacity={0.35} />
-          </line>
-        );
-      })}
-    </group>
   );
 }
 
@@ -413,7 +327,7 @@ function DataFlowLine({ startCity, endCity, color, delay, count, repoName }: {
   count: number;
   repoName: string;
 }) {
-  const lineRef = useRef<THREE.Line>(null);
+  const lineRef = useRef<any>(null);
   
   const start = useMemo(() => latLngToVector3(startCity.lat, startCity.lng, 2.02), [startCity]);
   const end = useMemo(() => latLngToVector3(endCity.lat, endCity.lng, 2.02), [endCity]);
@@ -442,9 +356,7 @@ function DataFlowLine({ startCity, endCity, color, delay, count, repoName }: {
   return (
     <group>
       {/* 实线弧线 */}
-      <line ref={lineRef} geometry={geometry}>
-        <lineBasicMaterial color={color} transparent opacity={0.4} />
-      </line>
+      <primitive object={new THREE.Line(geometry, new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0.4 }))} ref={lineRef} />
       
       {/* 数据标签 - 显示仓库名 */}
       <Html position={curve.getPoint(0.5)} center>
@@ -503,7 +415,7 @@ function Satellite({ orbitRadius, orbitTilt, orbitSpeed, startAngle, size, color
   color: string;
 }) {
   const groupRef = useRef<THREE.Group>(null);
-  const trailRef = useRef<THREE.Line>(null);
+  const trailRef = useRef<any>(null);
   const trailPositions = useRef<THREE.Vector3[]>([]);
   
   useFrame(({ clock }) => {
@@ -540,10 +452,7 @@ function Satellite({ orbitRadius, orbitTilt, orbitSpeed, startAngle, size, color
           <meshBasicMaterial color={color} transparent opacity={0.3} />
         </mesh>
       </group>
-      <line ref={trailRef}>
-        <bufferGeometry />
-        <lineBasicMaterial color={color} transparent opacity={0.2} />
-      </line>
+      <primitive object={new THREE.Line(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0.2 }))} ref={trailRef} />
     </>
   );
 }
